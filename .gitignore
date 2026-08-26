@@ -1,0 +1,12 @@
+__pycache__/
+*.zip
+*.pt
+*.pth
+dataset1/
+dataset2/
+dataset3/
+yolo_dataset/
+rfdetr_dataset/
+rfdetr_human_detection/
+runs/
+.venv/

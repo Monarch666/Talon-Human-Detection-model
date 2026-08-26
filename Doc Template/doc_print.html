@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Human Detection & Real-Time Tracking Pipeline - Technical Specification</title>
+<style>
+  @page {
+    size: A4;
+    margin: 20mm 15mm 20mm 15mm;
+  }
+  body {
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    color: #1a1a1a;
+    line-height: 1.6;
+    font-size: 11pt;
+    background: #ffffff;
+  }
+  .page-break {
+    page-break-before: always;
+  }
+  
+  /* Header / Footer styling */
+  .doc-header {
+    border-bottom: 2px solid #003366;
+    padding-bottom: 5px;
+    margin-bottom: 25px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 9pt;
+    color: #003366;
+    font-weight: bold;
+  }
+  
+  /* Title Page */
+  .title-page {
+    text-align: center;
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .main-title {
+    font-size: 26pt;
+    font-weight: 800;
+    color: #003366;
+    margin-bottom: 10px;
+    letter-spacing: -0.5px;
+  }
+  .sub-title {
+    font-size: 16pt;
+    color: #0066cc;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .tagline {
+    font-size: 11pt;
+    color: #666666;
+    margin-bottom: 40px;
+  }
+  .title-meta {
+    margin-top: 80px;
+    font-size: 10pt;
+    color: #333333;
+  }
+  .badge-confidential {
+    display: inline-block;
+    background: #003366;
+    color: #ffffff;
+    padding: 6px 16px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: 25px;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 18pt;
+    color: #003366;
+    border-bottom: 1px solid #003366;
+    padding-bottom: 4px;
+    margin-top: 25px;
+    margin-bottom: 15px;
+  }
+  h2 {
+    font-size: 14pt;
+    color: #0066cc;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  h3 {
+    font-size: 12pt;
+    color: #003366;
+    margin-top: 15px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    margin-bottom: 20px;
+    font-size: 10pt;
+  }
+  th, td {
+    border: 1px solid #cccccc;
+    padding: 8px 12px;
+    text-align: left;
+  }
+  th {
+    background-color: #f2f5f8;
+    color: #003366;
+    font-weight: bold;
+  }
+  tr:nth-child(even) {
+    background-color: #f9fbfd;
+  }
+
+  /* Boxes */
+  .notebox {
+    background: #eef6fc;
+    border-left: 4px solid #0066cc;
+    padding: 12px 16px;
+    margin: 15px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .warnbox {
+    background: #fff8ee;
+    border-left: 4px solid #ff8c00;
+    padding: 12px 16px;
+    margin: 15px 0;
+    border-radius: 0 4px 4px 0;
+  }
+  .alertbox {
+    background: #fdf2f2;
+    border-left: 4px solid #cc0000;
+    padding: 12px 16px;
+    margin: 15px 0;
+    border-radius: 0 4px 4px 0;
+  }
+
+  /* Code Blocks */
+  pre {
+    background: #f5f5f5;
+    border: 1px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 4px;
+    font-family: "Consolas", "Courier New", monospace;
+    font-size: 9.5pt;
+    overflow-x: auto;
+    line-height: 1.4;
+  }
+  code {
+    font-family: "Consolas", "Courier New", monospace;
+    background: #f0f0f0;
+    padding: 2px 5px;
+    border-radius: 3px;
+    font-size: 9.5pt;
+  }
+
+  /* Images */
+  .figure-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+  .figure-container img {
+    max-width: 95%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  }
+  .caption {
+    font-size: 9.5pt;
+    color: #555555;
+    margin-top: 6px;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+  <!-- TITLE PAGE -->
+  <div class="title-page">
+    <div class="main-title">HUMAN DETECTION & REAL-TIME TRACKING PIPELINE</div>
+    <div class="sub-title">Technical Specification & System Documentation</div>
+    <div class="tagline">Aerial Telemetry, RF-DETR Transformer Detection, & DeepSORT Target Lock</div>
+    
+    <div style="margin-top: 60px; font-size: 11pt;">
+      End-to-End Data Processing, Model Training, Evaluation, and Real-Time Operator Dashboard
+    </div>
+
+    <div class="title-meta">
+      <strong>Author:</strong> Aerial Vision & AI Systems Group<br>
+      <strong>Repository:</strong> e:\Human Detection Dataset<br>
+      <strong>Document Revision:</strong> 1.0 (August 2026)<br>
+      <div class="badge-confidential">TECHNICAL SPECIFICATION</div>
+    </div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <!-- DOCUMENT CONTROL -->
+  <div class="doc-header">
+    <span>Human Detection Pipeline v1.0</span>
+    <span>Document Control</span>
+  </div>
+
+  <h1>Document Control</h1>
+  <table>
+    <tr><th>Field</th><th>Value</th></tr>
+    <tr><td><strong>Document Title</strong></td><td>Human Detection Dataset & Real-Time Tracking Pipeline</td></tr>
+    <tr><td><strong>Document ID</strong></td><td>DOC-HDD-2026-v1.0</td></tr>
+    <tr><td><strong>Version</strong></td><td>1.0</td></tr>
+    <tr><td><strong>Status</strong></td><td>Released</td></tr>
+    <tr><td><strong>Author</strong></td><td>Vision AI Engineering Team</td></tr>
+    <tr><td><strong>Organization</strong></td><td>Aerial Systems & Autonomous Robotics Lab</td></tr>
+    <tr><td><strong>Release Date</strong></td><td>August 26, 2026</td></tr>
+  </table>
+
+  <div class="notebox">
+    <strong>System Overview:</strong> This technical document specifies the data conversion, dataset partitioning, deep learning architecture (RF-DETR / RT-DETR), and DeepSORT target locking engine for aerial human detection under low-bandwidth 480p drone feeds.
+  </div>
+
+  <h1>Revision History</h1>
+  <table>
+    <tr><th>Version</th><th>Date</th><th>Author(s)</th><th>Changes</th></tr>
+    <tr><td>1.0</td><td>2026-08-26</td><td>Vision AI Group</td><td>Initial release of dataset conversion, RF-DETR fine-tuning, and interactive target lock demo.</td></tr>
+  </table>
+
+  <h1>Abstract</h1>
+  <p>Real-time human detection and tracking from aerial drone platforms present unique computer vision challenges, including low pixel resolution, extreme perspective distortion, scale variation, and motion blur caused by drone vibrations and gimbal movement.</p>
+  <p>This document presents the complete engineering specification for the <strong>Human Detection & Tracking Pipeline</strong>. Key system capabilities include:</p>
+  <ul>
+    <li><strong>Automated VoTT-to-YOLO Converter:</strong> Converts multi-class VoTT CSV annotations into normalized single-class human detection labels (<code>class_id = 0</code>).</li>
+    <li><strong>RF-DETR & RT-DETR Training Modules:</strong> Transformer-based detection engines fine-tuned specifically for small-object aerial imagery at 640×480 input resolution.</li>
+    <li><strong>DeepSORT Target Locking & Visual ReID:</strong> Integrates MobileNet visual embeddings with Kalman filter tracking to allow operators to lock onto individual targets via mouse click.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <!-- PIPELINE ARCHITECTURE -->
+  <div class="doc-header">
+    <span>Human Detection Pipeline v1.0</span>
+    <span>Architecture & Dataset</span>
+  </div>
+
+  <h1>1. System Architecture</h1>
+  <p>The system consists of five decoupled stages: Data Ingestion, Format Conversion, Dataset Partitioning, Transformer Model Fine-Tuning, and Live GCS Inference/Tracking.</p>
+
+  <table>
+    <tr><th>Component Script</th><th>Functional Description</th></tr>
+    <tr><td><code>convert_to_yolo.py</code></td><td>Parses VoTT CSV annotations, extracts bounding boxes, normalizes coordinates to [0, 1], creates <code>yolo_dataset/dataset.yaml</code>.</td></tr>
+    <tr><td><code>reorganize_dataset.py</code></td><td>Structures image/label splits into <code>rfdetr_dataset</code> format with train/valid splits and <code>data.yaml</code>.</td></tr>
+    <tr><td><code>train.py</code></td><td>Fine-tunes RT-DETR Large (<code>rtdetr-l.pt</code>) using Ultralytics engine (100 epochs, 640 imgsz).</td></tr>
+    <tr><td><code>rfdetr_train.py</code></td><td>Fine-tunes <code>RFDETRMedium</code> transformer with 4-step gradient accumulation (lr = 1e-4).</td></tr>
+    <tr><td><code>eval_confusion_matrix.py</code></td><td>Benchmarks validation predictions using Supervision library (conf=0.3, IoU=0.5).</td></tr>
+    <tr><td><code>demo.py</code></td><td>Real-time video/webcam feed demo with OpenCV, DeepSORT tracking, and mouse target locking.</td></tr>
+    <tr><td><code>Launcher.bat</code></td><td>Windows batch menu utility for unified pipeline execution.</td></tr>
+  </table>
+
+  <h1>2. Specification & Annotation Normalization</h1>
+  <p>Bounding box coordinates (xmin, ymin, xmax, ymax) are transformed into normalized center offsets (xc, yc, w, h):</p>
+  <pre>
+xc = (xmin + xmax) / (2 * Width)
+yc = (ymin + ymax) / (2 * Height)
+w  = (xmax - xmin) / Width
+h  = (ymax - ymin) / Height
+  </pre>
+
+  <h1>3. Live Demonstration Result</h1>
+  <div class="figure-container">
+    <img src="../demo_output.jpg" alt="Aerial Human Detection Live Output">
+    <div class="caption">Figure 1: RF-DETR Aerial Human Detection Engine running on validation drone video stream (19 human targets detected).</div>
+  </div>
+
+  <div class="warnbox">
+    <strong>Aerial Tracking Buffer:</strong> DeepSORT tracking maintains a 60-frame (~2s) lost-track buffer to preserve target IDs through momentary gimbal jitter or tree canopy occlusions.
+  </div>
+
+  <div class="alertbox">
+    <strong>Operator Advisory:</strong> Target locking is an operator-assist feature. Drone flight control loops must maintain independent collision avoidance logic.
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Core Deep Learning & Computer Vision
+rfdetr
+torch
+torchvision
+opencv-python
+numpy
+
+# Tracking & Detection Utilities
+supervision>=0.18.0
+deep-sort-realtime
